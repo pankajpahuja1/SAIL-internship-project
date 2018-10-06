@@ -5,9 +5,9 @@ session_start();
    if($_SESSION['user2'])
    {
    }
-   else 
+   else
    {
-	   header("location: login.php"); 
+	   header("location: login.php");
    }
 
 ?>
@@ -23,7 +23,7 @@ session_start();
 	height:70px;
 	float:left;
 	text-align:center;
-	
+
 	color:white;
 	font-size:25px;
 }
@@ -36,7 +36,7 @@ div
 input.MYButton
 {
 	font-size:150%;
-	
+
 	background-color:maroon;
 	color:white;
 	  cursor: pointer;
@@ -47,20 +47,20 @@ input.MYButton
   box-shadow: 0 9px #999;
 }
 
-</style>		
+</style>
 </head>
 
-		
+
 <body style="background-color:white;">
 <div><img src ="ss.png" width=300 height=300 border=0>	</br></br></div>
 	<div id = "container">
-		
+
 		<form align="right">
 		<input class = "MYButton"  type="button" value= "logout" onclick="window.location.href='logout.php'" />
 		</form>
 	</div>
 
-	
+
 <h1><center>Registration Page</center> </h1>
 <input class = "MYButton" type="button" value= "HOME"  onclick="window.location.href='mhome.php'" /><br><br>
 <form action="register.php" align="center" method="post">
@@ -81,28 +81,28 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	$id = ($_POST['id']);
 	$username = ($_POST['username']);
 	$password = ($_POST['password']);
-	
+
 	$designation =($_POST['designation']);
-	
+
     $bool = true;
 	$a = mysqli_connect("localhost", "root","Pankaj@123","first_try") or die(mysql_error());                                                                         //mysqli_select_db("first_try") or die("Cannot connect to database"); //Connect to database
 	$query = mysqli_query($a,"Select * from users");
-	while($row = mysqli_fetch_array($query)) 
+	while($row = mysqli_fetch_array($query))
 	{
-		$table_users = $row['username']; 
+		$table_users = $row['username'];
 		$table_userid = $row['id'];
 		if($username == $table_users || $id == $table_userid )
 		{
-			$bool = false; 
+			$bool = false;
 			Print '<script>alert("Username or id has been taken!");</script>';
-			Print '<script>window.location.assign("register.php");</script>'; 
+			Print '<script>window.location.assign("register.php");</script>';
 		}
 	}
-	if($bool) 
+	if($bool)
 	{
 		mysqli_query($a,"INSERT INTO users (id,username, password,designation) VALUES ('$id','$username','$password','$designation')"); //Inserts the value to table users
-		Print '<script>alert("Successfully Registered!");</script>'; 
-		Print '<script>window.location.assign("register.php");</script>'; 
+		Print '<script>alert("Successfully Registered!");</script>';
+		Print '<script>window.location.assign("register.php");</script>';
 	}
 }
 ?>
